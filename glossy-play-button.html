@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Glossy Play Button</title>
+
+</head>
+
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+    }
+
+    .video-stuff-ctn {
+        margin: auto;
+        height: 50vh;
+        position: relative
+    }
+
+    .video-overlay {
+        opacity: 0;
+        background: rgba(0,0,0, 0.5);
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        display: flex;
+    }
+
+    .video-overlay.active {
+        opacity: 1;
+    }
+
+    .video-overlay:hover .gloss-button {
+        border-color: lightblue;
+    }
+
+    .gloss-button {
+        margin: auto;
+        background: black;
+        border-radius: 100%;
+        height: 60px;
+        width: 60px;
+        position: relative;
+        border: 1px solid white;
+        box-shadow: 0 0 1px 1px black;
+        display: flex;
+        overflow: hidden;
+    }
+
+    .gloss-button:before{
+        content:'';
+        position:absolute;
+        width:150%;
+        height:100%;
+        top:40%; /* This is the one to change */
+        right:-40%;
+        background:rgba(255,255,255,0.3);
+        background:
+            linear-gradient(
+            top,
+            rgba(255,255,255,0.1),
+            rgba(255,255,255,0.3)
+            );
+        ;
+        transform:rotate(-20deg); /* Change the slope of the gloss */
+        
+        /* Get fancy with the borders here */
+        border-radius: 40% 40% 0 0;
+        /*  
+        border-bottom-left-radius:200px 20px;
+        border-bottom-right-radius: 200px 10px;
+        border-top-right-radius:5px 100px; 
+        */
+        
+        /*
+        To see the gloss slant for testing purposes:
+        1) Remove overflow: hidden - on target element
+        2) put a color background on parent element
+        */
+    }
+
+    .play-icon-border {
+        margin: auto;
+        display: flex;
+        
+        height: 50%;
+        width: 55%;
+        
+        clip-path: polygon(25% 0, 25% 100%, 100% 50%);
+        background: lightblue;
+    }
+
+    .play-icon {
+        clip-path: polygon(25% 0, 25% 100%, 100% 50%);
+        height: 80%;
+        width: 80%;
+        margin: auto;
+        
+        box-sizing: border-box;
+        background: black;
+        
+        overflow: hidden;
+    }
+
+    .play-icon:before{
+        content:'';
+        position:absolute;
+        width:150%;
+        height:100%;
+        top:40%; /* This is the one to change */
+        right:-40%;
+        background:rgba(255,255,255,0.3);
+        background:
+            linear-gradient(
+            top,
+            rgba(255,255,255,0.1),
+            rgba(255,255,255,0.3)
+            );
+        ;
+        transform:rotate(-20deg); /* Change the slope of the gloss */
+        
+        /* Get fancy with the borders here */
+        border-radius: 40% 40% 0 0;
+    /*  border-bottom-left-radius:200px 20px;
+        border-bottom-right-radius: 200px 10px;
+        border-top-right-radius:5px 100px; */
+        
+        /*
+        To see the gloss slant for testing purposes:
+        1) Remove overflow: hidden - on target element
+        2) put a color background on parent element
+        */
+    }
+</style>
+
+
+<body>
+    <div class="video-stuff-ctn">
+        <video alt="sample video">
+            <source src="http://media.w3.org/2010/05/sintel/trailer.mp4" type="video/mp4">
+        </video>
+
+        <div class="video-overlay active">
+            <div class="gloss-button">
+                <div class="play-icon-border">
+                    <div class="play-icon"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+<script>
+    let overlay = document.querySelector('.video-overlay')
+    let video = document.querySelector('video')
+
+
+    overlay.addEventListener('click', toggle_play)
+
+    function toggle_play() {
+        
+        if( video.classList.contains('active') ) {
+            video.pause()
+            video.classList.remove('active')
+            overlay.classList.add('active')
+        }
+        else {
+            video.classList.add('active')
+            overlay.classList.remove('active')
+            video.play()
+        }
+    }
+</script>
+
+
+</html>
